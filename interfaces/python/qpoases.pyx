@@ -403,6 +403,9 @@ cdef class PyQProblemB:
         cdef np.ndarray nWSR_tmp
         cdef np.ndarray cput_tmp
 
+        lb_ptr = <double*>lb.data if lb is not None else NULL
+        ub_ptr = <double*>ub.data if ub is not None else NULL
+
         # enable nWSR as return value in argument list
         if isinstance(nWSR, int):
             deprecation_warning_nWSR()
@@ -421,8 +424,8 @@ cdef class PyQProblemB:
             return self.thisptr.init(
                     <double*> H.data,
                     <double*> g.data,
-                    <double*> lb.data,
-                    <double*> ub.data,
+                    lb_ptr,
+                    ub_ptr,
                     <int&>    nWSR_tmp.data[0],
                     <double*> &cput_tmp.data[0]
                     )
@@ -430,8 +433,8 @@ cdef class PyQProblemB:
         return self.thisptr.init(
                     <double*> H.data,
                     <double*> g.data,
-                    <double*> lb.data,
-                    <double*> ub.data,
+                    lb_ptr,
+                    ub_ptr,
                     <int&> nWSR_tmp.data[0]
                     )
 
@@ -521,6 +524,11 @@ cdef class PyQProblem:
         cdef np.ndarray nWSR_tmp
         cdef np.ndarray cput_tmp
 
+        lb_ptr = <double*>lb.data if lb is not None else NULL
+        ub_ptr = <double*>ub.data if ub is not None else NULL
+        lbA_ptr = <double*>lbA.data if lbA is not None else NULL
+        ubA_ptr = <double*>ubA.data if ubA is not None else NULL
+
         # enable nWSR as return value in argument list
         if isinstance(nWSR, int):
             deprecation_warning_nWSR()
@@ -540,10 +548,10 @@ cdef class PyQProblem:
                     <double*> H.data,
                     <double*> g.data,
                     <double*> A.data,
-                    <double*> lb.data,
-                    <double*> ub.data,
-                    <double*> lbA.data,
-                    <double*> ubA.data,
+                    lb_ptr,
+                    ub_ptr,
+                    lbA_ptr,
+                    ubA_ptr,
                     <int&>    nWSR_tmp.data[0],
                     <double*> &cput_tmp.data[0]
                 )
@@ -552,10 +560,10 @@ cdef class PyQProblem:
                     <double*> H.data,
                     <double*> g.data,
                     <double*> A.data,
-                    <double*> lb.data,
-                    <double*> ub.data,
-                    <double*> lbA.data,
-                    <double*> ubA.data,
+                    lb_ptr,
+                    ub_ptr,
+                    lbA_ptr,
+                    ubA_ptr,
                     <int&>    nWSR_tmp.data[0]
                 )
 
@@ -644,6 +652,11 @@ cdef class PySQProblem:
         cdef np.ndarray nWSR_tmp
         cdef np.ndarray cput_tmp
 
+        lb_ptr = <double*>lb.data if lb is not None else NULL
+        ub_ptr = <double*>ub.data if ub is not None else NULL
+        lbA_ptr = <double*>lbA.data if lbA is not None else NULL
+        ubA_ptr = <double*>ubA.data if ubA is not None else NULL
+
         # enable nWSR as return value in argument list
         if isinstance(nWSR, int):
             deprecation_warning_nWSR()
@@ -663,10 +676,10 @@ cdef class PySQProblem:
                         <double*> H.data,
                         <double*> g.data,
                         <double*> A.data,
-                        <double*> lb.data,
-                        <double*> ub.data,
-                        <double*> lbA.data,
-                        <double*> ubA.data,
+                        lb_ptr,
+                        ub_ptr,
+                        lbA_ptr,
+                        ubA_ptr,
                         <int&>    nWSR_tmp.data[0],
                         <double*> &cput_tmp.data[0]
                 )
@@ -675,10 +688,10 @@ cdef class PySQProblem:
                     <double*> H.data,
                     <double*> g.data,
                     <double*> A.data,
-                    <double*> lb.data,
-                    <double*> ub.data,
-                    <double*> lbA.data,
-                    <double*> ubA.data,
+                    lb_ptr,
+                    ub_ptr,
+                    lbA_ptr,
+                    ubA_ptr,
                     <int&>    nWSR_tmp.data[0],
         )
 
